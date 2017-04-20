@@ -4,6 +4,7 @@ sudo: required
 mono: none
 dotnet: 1.0.1
 before_script:
-    dotnet restore
+ - dotnet restore
+ - dotnet test ./ScribeTest/ScribeTest.csproj
 script:
     dotnet build
