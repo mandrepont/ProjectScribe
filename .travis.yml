@@ -1,5 +1,9 @@
-language: csharp
-solution: ProjectScribe.sln
+anguage: csharp
+dist: trusty
+sudo: required
 mono: none
 dotnet: 1.0.1
-dist: trusty
+before_script:
+    dotnet restore
+script:
+    dotnet build
