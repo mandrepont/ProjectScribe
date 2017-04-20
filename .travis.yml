@@ -1,5 +1,5 @@
 language: csharp
-solution: 'Project scribe.sln'
+solution: ProjectScribe.sln
 mono: none
 dotnet: 1.0.1
 dist: trusty
