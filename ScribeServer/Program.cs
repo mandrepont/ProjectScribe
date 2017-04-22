@@ -13,14 +13,14 @@ namespace ScribeServer
         public static void Main(string[] args)
         {
             Console.WriteLine("Checking database");
-            ScribeServer.Models.Database.CheckDatabase();
-
+            Models.Database.CheckDatabase();
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseUrls("http://localhost:5001")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<Startup>()
                 .UseApplicationInsights()
+                .UseStartup<Startup>()
                 .Build();
 
             host.Run();

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ScribeServer.Models;
 using ScribeServer.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ScribeServer.Controllers
 {
@@ -21,9 +22,44 @@ namespace ScribeServer.Controllers
         /// </summary>
         /// <returns>JSON Array of all notes.</returns>
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Note> Get()
         {
-            return Database.GlobalDatabase.Notes;
+            return Database.GlobalDatabase.Notes.Where(n => !n.IsPrivate);
+        }
+
+        /// <summary>
+        /// ROUTE: api/notes/private
+        /// Gets a list of all the private notes made by a user.
+        /// WARNING: If the note program has large amounts of notes this could be a bottle neck.
+        /// Instead a most recent created list would be a better idea in a large enviroment
+        /// Also server side search would have to be implimented. 
+        /// </summary>
+        /// <returns>JSON Array of all private notes.</returns>
+        [HttpGet("private")]
+        [Authorize]
+        public IEnumerable<Note> GetPrivate()
+        {
+            var sub = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub").Value.ToString());
+            var user = Database.GlobalDatabase.Users.FirstOrDefault(u => u.AuthorId == sub);
+            return Database.GlobalDatabase.Notes.Where(n => n.AuthorId == user.AuthorId && n.IsPrivate);
+        }
+
+        /// <summary>
+        /// ROUTE: api/notes/private/{id}
+        /// Used for getting logged in members private content.
+        /// NOTE: id:int means that it takes a strict datatype of int
+        /// EX: GET: api/notes/abd will return 404.
+        /// </summary>
+        /// <param name="id">ID of the note.</param>
+        /// <returns>Returns 204 if no note is found, and 200 if the note is found with the note as the body.</returns>
+        [HttpGet("private/{id:int}")]
+        [Authorize]
+        public Note GetPrivate(int id)
+        {
+            var sub = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub").Value.ToString());
+            var user = Database.GlobalDatabase.Users.FirstOrDefault(u => u.AuthorId == sub);
+            return Database.GlobalDatabase.Notes.FirstOrDefault(n => n.AuthorId == user.AuthorId && n.IsPrivate && n.Id == id);
         }
 
         /// <summary>
@@ -37,7 +73,7 @@ namespace ScribeServer.Controllers
         [HttpGet("{id:int}")]
         public Note Get(int id)
         {
-            return  Database.GlobalDatabase.Notes.SingleOrDefault(s=> s.Id == id);
+            return  Database.GlobalDatabase.Notes.SingleOrDefault(s=> s.Id == id && !s.IsPrivate);
         }
 
         /// <summary>
@@ -48,21 +84,26 @@ namespace ScribeServer.Controllers
         /// <param name="content">Note requesting to be added.</param>
         /// <returns>
         /// Returns the HTTP standard status codes for created content on a post.
+        /// 401 for unauthized
         /// 400 for bad format.
         /// 500 for internal error adding the database.
         /// </returns>
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody]Note content)
         {
+            var sub = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub").Value.ToString());
+            var user = Database.GlobalDatabase.Users.FirstOrDefault(u => u.AuthorId == sub);
             //MVC Auto searlized the json into the object, however if the content is null
             //then there was a problem with the searization of the object
             //Becuase our model has required field we need to make sure the client respected
             // those conditions.
-            if(content!=null && ModelState.IsValid)
+            if (content!=null && ModelState.IsValid)
             {
-
+                content.AuthorId = user.AuthorId;
+                content.AuthorName = user.Name;
                 if (NoteHandler.AddNote(content))
-                    return new CreatedAtActionResult("notes", "GET", Database.GlobalDatabase.LastNoteID, content);
+                    return StatusCode(201);
                 else
                     return StatusCode(500);               
             }

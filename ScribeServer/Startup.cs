@@ -25,10 +25,16 @@ namespace ScribeServer
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services
+        .AddMvcCore()
+        .AddAuthorization()
+        .AddApiExplorer()
+        .AddJsonFormatters();
+
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "ASV Global Note API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Note API", Version = "v1" });
             });
 
         }
@@ -38,7 +44,15 @@ namespace ScribeServer
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-           
+
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = "http://localhost:59060",
+                RequireHttpsMetadata = false,
+
+                ApiName = "note_api"
+            });
+
             app.UseMvc();
             //Init swagger for API documentation and testing
             app.UseSwagger();

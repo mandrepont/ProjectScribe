@@ -18,6 +18,7 @@ namespace ScribeServer.Models
 
         public List<Note> Notes { get; set; }
         public int LastNoteID { get; set; }
+        public List<User> Users { get; set; }
 
         //Static Database of current information.
         //Not the most practical in production.
@@ -26,13 +27,30 @@ namespace ScribeServer.Models
         /// <summary>
         /// Creates the database for the first time with default values
         /// to avoid null excpetions.
+        /// Prefills the users also hardcoded from the auth server.
         /// </summary>
         public static void InitDatabase()
         {
             GlobalDatabase = new Database()
             {
                 Notes = new List<Note>(),
-                LastNoteID = 0
+                LastNoteID = 0,
+                //Fill in some hard coded user data.
+                Users = new List<User>()
+                {
+                    new User()
+                    {
+                        Name = "Michael",
+                        AuthorId = 1,
+                        Role = UserRoles.Author
+                    },
+                    new User()
+                    {
+                        Name = "Admin",
+                        AuthorId = 2,
+                        Role = UserRoles.Admin
+                    },
+                }
             };
         }
 
