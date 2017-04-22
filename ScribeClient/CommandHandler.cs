@@ -22,6 +22,7 @@ namespace ScribeClient
             Commands.Add(new LookUp());
             Commands.Add(new RemoveNote());
             Commands.Add(new EditNote());
+            Commands.Add(new Login());
         }
 
 

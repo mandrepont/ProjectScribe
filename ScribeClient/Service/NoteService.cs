@@ -14,7 +14,8 @@ namespace ScribeClient.Service
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:57517");
+                client.BaseAddress = new Uri(Constants.BASE_URI_API);
+                client.SetBearerToken(Constants.AccessToken);
                 var jsonnote = JsonConvert.SerializeObject(note);
                 var content = new StringContent(jsonnote, Encoding.UTF8, "application/json");
                 try
@@ -37,7 +38,7 @@ namespace ScribeClient.Service
             var publiclist = new List<Note>();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:57517");
+                client.BaseAddress = new Uri(Constants.BASE_URI_API);
                 try
                 {
                     var respone = await client.GetAsync("/api/notes");
@@ -54,12 +55,57 @@ namespace ScribeClient.Service
                 return publiclist;
         }
 
+        public static async Task<List<Note>> GetPrivateList()
+        {
+            var publiclist = new List<Note>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Constants.BASE_URI_API);
+                client.SetBearerToken(Constants.AccessToken);
+                try
+                {
+                    var respone = await client.GetAsync("/api/notes/private");
+                    string list = await respone.Content.ReadAsStringAsync();
+                    publiclist = JsonConvert.DeserializeObject<List<Note>>(list);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                }
+
+            }
+
+            return publiclist;
+        }
+
+        public static async Task<Note> GetPrivateNoteById(int id)
+        {
+            var note = new Note();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Constants.BASE_URI_API);
+                client.SetBearerToken(Constants.AccessToken);
+                try
+                {
+                    var respone = await client.GetAsync("/api/notes/private/" + id);
+                    string jsonnote = await respone.Content.ReadAsStringAsync();
+                    note = JsonConvert.DeserializeObject<Note>(jsonnote);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                }
+            }
+
+            return note;
+        }
+
         public static async Task<Note> GetNoteById(int id)
         {
             var note = new Note();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:57517");
+                client.BaseAddress = new Uri(Constants.BASE_URI_API);
                 try
                 {
                     var respone = await client.GetAsync("/api/notes/" + id);
@@ -79,7 +125,7 @@ namespace ScribeClient.Service
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:57517");
+                client.BaseAddress = new Uri(Constants.BASE_URI_API);
                 var jsonnote = JsonConvert.SerializeObject(note);
                 var content = new StringContent(jsonnote, Encoding.UTF8, "application/json");
                 try
@@ -100,7 +146,7 @@ namespace ScribeClient.Service
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:57517");
+                client.BaseAddress = new Uri(Constants.BASE_URI_API);
                 try
                 {
                     var respone = await client.DeleteAsync("/api/notes/" + id);
