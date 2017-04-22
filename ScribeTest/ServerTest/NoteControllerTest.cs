@@ -71,22 +71,6 @@ namespace ScribeTest.ServerTest
                 Assert.NotNull(note);
         }
 
-        /// <summary>
-        /// Post some data and make sure that data is really there. 
-        /// </summary>
-        [Fact]
-        public void PostTest()
-        {
-            var note = new Note
-            {
-                AuthorId = 3,
-                Content= "Content 3",
-                Title = "PostedNote",
-                AuthorName = "Name 3",
-            };
-            controller.Post(note);
-            Assert.NotNull(Database.GlobalDatabase.Notes.First(n => n.Title == note.Title));
-        }
 
         /// <summary>
         /// Edits the 3rd note and gets it out the database.

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScribeClient", "ScribeClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScribeTest", "ScribeTest\ScribeTest.csproj", "{8CC07C65-F094-4D5D-825E-9A0B5BC4454B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenicationServer", "AuthenicationServer\AuthenicationServer.csproj", "{D05A7935-365C-4AAE-8522-E95C05ECAD01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8CC07C65-F094-4D5D-825E-9A0B5BC4454B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC07C65-F094-4D5D-825E-9A0B5BC4454B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC07C65-F094-4D5D-825E-9A0B5BC4454B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05A7935-365C-4AAE-8522-E95C05ECAD01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05A7935-365C-4AAE-8522-E95C05ECAD01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05A7935-365C-4AAE-8522-E95C05ECAD01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05A7935-365C-4AAE-8522-E95C05ECAD01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
