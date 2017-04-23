@@ -13,6 +13,11 @@ namespace ScribeClient.Commands
 
         public string Ussage => "editnote {id}, where id is the note id you wish to edit then follow the prompts";
 
+        /// <summary>
+        /// Edit note is not how I would like it to be, but what can I expect for a console application.
+        /// simply allows users to edit their post.
+        /// </summary>
+        /// <param name="args">Command args.</param>
         public void Execute(string[] args)
         {
             if(args.Length <= 1)

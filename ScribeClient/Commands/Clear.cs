@@ -12,6 +12,10 @@ namespace ScribeClient.Commands
 
         public string Ussage => "Just type clear and watch the magic happen...";
 
+        /// <summary>
+        /// Simply clears the console.
+        /// </summary>
+        /// <param name="args">Command args.</param>
         public void Execute(string[] args)
         {
             Console.Clear();

@@ -11,6 +11,13 @@ namespace ScribeClient.Service
 {
     public class AccountService
     {
+        /// <summary>
+        /// Authenticates the user and retreives that user's jwt token.
+        /// </summary>
+        /// <param name="username">Username of the client.</param>
+        /// <param name="password">Password of the client.</param>
+        /// <returns>true = authenicated
+        /// false = failed.</returns>
         public static async Task<bool> Authenticate(string username, string password)
         {
             var disco = await DiscoveryClient.GetAsync(Constants.BASE_URI_AUTH);
@@ -26,6 +33,10 @@ namespace ScribeClient.Service
             return true;
         }
 
+        /// <summary>
+        /// Used to test if the auth worked and also to get other info about the user from the user endpoint.
+        /// </summary>
+        /// <returns>User role.</returns>
         public static async Task<string> GetValues()
         {
             if (Constants.AccessToken == null)

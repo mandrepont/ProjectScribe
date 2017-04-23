@@ -14,14 +14,18 @@ namespace ScribeClient.Commands
 
         public string Ussage => "type rmnote {id} where id is the note id you wish to remove.";
 
+        /// <summary>
+        /// Removes a note from the server.
+        /// </summary>
+        /// <param name="args">Command args.</param>
         public void Execute(string[] args)
         {
             if (args.Length <= 1)
             {
-                Console.WriteLine("Invalid Command Ussage type editnote -h for help");
+                Console.WriteLine("Invalid Command Ussage type rmnote -h for help");
                 return;
             }
-
+            //TODO: Check if the user is logged in.
             if (int.TryParse(args[1], out int id))
             {
                 var result = Task.Run(() => NoteService.RemoveNote(id));

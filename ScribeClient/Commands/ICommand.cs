@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ScribeClient.Commands
 {
+    /// <summary>
+    /// Command interface used for every command. 
+    /// </summary>
     public interface ICommand
     {
         string Command { get;}

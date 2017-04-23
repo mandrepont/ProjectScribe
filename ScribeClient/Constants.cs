@@ -7,6 +7,7 @@ namespace ScribeClient
 {
     public class Constants
     {
+        //Server Level Constants
         public const string BASE_URI_API = "http://localhost:5001";
         public const string BASE_URI_AUTH = "http://localhost:59060";
         public const string AUTH_SECRET = "SuperSecretKey";

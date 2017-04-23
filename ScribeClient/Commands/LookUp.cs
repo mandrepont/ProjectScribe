@@ -13,6 +13,11 @@ namespace ScribeClient.Commands
 
         public string Ussage => "lookup [title key word or words]";
 
+        /// <summary>
+        /// Used for Searching public list.
+        /// Might add an option such as lookup -p [term] to search private
+        /// </summary>
+        /// <param name="args">Command args.</param>
         public void Execute(string[] args)
         {
             var commandString = string.Join(" ", args);

@@ -14,11 +14,15 @@ namespace ScribeClient.Commands
         public string Ussage => "lsnote [Options] \n Options: \n public : returns all public note's title and ids\n private : Returns all private notes posted by the current logged in user" +
             "\n noteid : Returns a particular note in detail EX 'lsnote 3'\n private {id} : Returns details about a private note created by logged in user.";
 
+        /// <summary>
+        /// This commands determins what list or indivdual note the user is request and gets that list or note. 
+        /// </summary>
+        /// <param name="args"></param>
         public void Execute(string[] args)
         {
             if (args.Length <= 1)
             {
-                Console.WriteLine("Invalid Command Ussage type editnote -h for help");
+                Console.WriteLine("Invalid Command Ussage type lsnote -h for help");
                 return;
             }
             if (args[1] == "public")

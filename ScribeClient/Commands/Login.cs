@@ -13,6 +13,10 @@ namespace ScribeClient.Commands
 
         public string Ussage => "login [username] [password]";
 
+        /// <summary>
+        /// Excutes a login autheniceniation with the auth server.
+        /// </summary>
+        /// <param name="args">Command args.</param>
         public void Execute(string[] args)
         {
             if(args.Length == 3)

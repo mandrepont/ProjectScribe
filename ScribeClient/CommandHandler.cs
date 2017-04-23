@@ -11,6 +11,10 @@ namespace ScribeClient
     public class CommandHandler
     {
         private List<ICommand> Commands;
+
+        /// <summary>
+        /// Register all command handlers.
+        /// </summary>
         public CommandHandler()
         {
             Commands = new List<ICommand>();
@@ -25,7 +29,9 @@ namespace ScribeClient
             Commands.Add(new Login());
         }
 
-
+        /// <summary>
+        /// Listen for the next incoming command.
+        /// </summary>
         public void Listen()
         {
             //Draw command prompt
@@ -35,13 +41,18 @@ namespace ScribeClient
             HandleCommand(args);
         }
 
+        /// <summary>
+        /// Determin how to handle a command what what should be done.
+        /// Called by the listener.
+        /// </summary>
+        /// <param name="command">Command imput.</param>
         private void HandleCommand(string[] command)
         {
             if (command[0] == "help")
             {
-                Console.WriteLine("[ActionWord] || [Description]");
+                Console.WriteLine(string.Format("{0,-12} || {1}", "[ActionWord]", "[Description]"));
                 foreach (var cmd in Commands)
-                    Console.WriteLine(cmd.Command + " || " + cmd.Description);
+                    Console.WriteLine(string.Format("{0,-12} || {1}", cmd.Command, cmd.Description));
                 Console.WriteLine("Put -h as the first argument on any command for ussage information.");
             }
             else
