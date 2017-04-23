@@ -17,8 +17,8 @@ namespace ScribeServer.Controllers
         /// ROUTE: api/notes
         /// Gets a list of all the notes in the current general repository.
         /// WARNING: If the note program has large amounts of notes this could be a bottle neck.
-        /// Instead a most recent created list would be a better idea in a large enviroment
-        /// Also server side search would have to be implimented. 
+        /// Instead a most recent created list would be a better idea in a large environment
+        /// Also server side search would have to be implemented. 
         /// </summary>
         /// <returns>JSON Array of all notes.</returns>
         [HttpGet]
@@ -32,8 +32,8 @@ namespace ScribeServer.Controllers
         /// ROUTE: api/notes/private
         /// Gets a list of all the private notes made by a user.
         /// WARNING: If the note program has large amounts of notes this could be a bottle neck.
-        /// Instead a most recent created list would be a better idea in a large enviroment
-        /// Also server side search would have to be implimented. 
+        /// Instead a most recent created list would be a better idea in a large environment
+        /// Also server side search would have to be implemented. 
         /// </summary>
         /// <returns>JSON Array of all private notes.</returns>
         [HttpGet("private")]
@@ -48,7 +48,7 @@ namespace ScribeServer.Controllers
         /// <summary>
         /// ROUTE: api/notes/private/{id}
         /// Used for getting logged in members private content.
-        /// NOTE: id:int means that it takes a strict datatype of int
+        /// NOTE: id:int means that it takes a strict data type of int
         /// EX: GET: api/notes/abd will return 404.
         /// </summary>
         /// <param name="id">ID of the note.</param>
@@ -64,8 +64,8 @@ namespace ScribeServer.Controllers
 
         /// <summary>
         /// ROUTE: GET: api/notes/id
-        /// Gets the note assosated with the id in the URI.
-        /// NOTE: id:int means that it takes a strict datatype of int
+        /// Gets the note associated with the id in the URI.
+        /// NOTE: id:int means that it takes a strict data type of int
         /// EX: GET: api/notes/abd will return 404.
         /// </summary>
         /// <param name="id">Id of the note.</param>
@@ -78,13 +78,13 @@ namespace ScribeServer.Controllers
 
         /// <summary>
         /// ROUTE: POST api/notes/
-        /// Used for adding new notes to the general respository
+        /// Used for adding new notes to the general repository
         /// TODO:Add private repo for users.
         /// </summary>
         /// <param name="content">Note requesting to be added.</param>
         /// <returns>
         /// Returns the HTTP standard status codes for created content on a post.
-        /// 401 for unauthized
+        /// 401 for unauthorized
         /// 400 for bad format.
         /// 500 for internal error adding the database.
         /// </returns>
@@ -94,9 +94,9 @@ namespace ScribeServer.Controllers
         {
             var sub = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub").Value.ToString());
             var user = Database.GlobalDatabase.Users.FirstOrDefault(u => u.AuthorId == sub);
-            //MVC Auto searlized the json into the object, however if the content is null
-            //then there was a problem with the searization of the object
-            //Becuase our model has required field we need to make sure the client respected
+            //MVC Auto serialized the json into the object, however if the content is null
+            //then there was a problem with the serializing of the object
+            //Because our model has required field we need to make sure the client respected
             // those conditions.
             if (content!=null && ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace ScribeServer.Controllers
         /// <summary>
         /// ROUTE: PUT /api/notes/id
         /// Updated for updating database information on notes.
-        /// Noramally a put can also act as a post, but I do not want it 
+        /// Normally a put can also act as a post, but I do not want it 
         /// to in this application.
         /// NOTE: id:int means that it takes a strict datatype of int
         /// EX: PUT: api/notes/abd will return 404.

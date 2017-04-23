@@ -17,7 +17,7 @@ namespace ScribeTest.ServerTest
         private NotesController controller;
 
         /// <summary>
-        /// For this constructer we do not get live data so we must make the database in a mock way.
+        /// For this constructor we do not get live data so we must make the database in a mock way.
         /// </summary>
         public NoteControllerTest()
         {

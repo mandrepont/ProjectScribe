@@ -9,9 +9,9 @@ namespace ScribeClient.Commands
     {
         public string Command => "lookup";
 
-        public string Description => "Seraches the public list and if user is logged in also the private list";
+        public string Description => "Searches the public list and if user is logged in also the private list";
 
-        public string Ussage => "lookup [title key word or words]";
+        public string Usage => "lookup [title key word or words]";
 
         /// <summary>
         /// Used for Searching public list.

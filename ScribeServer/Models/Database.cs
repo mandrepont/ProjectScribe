@@ -26,8 +26,8 @@ namespace ScribeServer.Models
 
         /// <summary>
         /// Creates the database for the first time with default values
-        /// to avoid null excpetions.
-        /// Prefills the users also hardcoded from the auth server.
+        /// to avoid null exceptions.
+        /// Prefills the users also hard-coded from the auth server.
         /// </summary>
         public static void InitDatabase()
         {

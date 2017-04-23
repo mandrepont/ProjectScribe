@@ -12,7 +12,7 @@ namespace ScribeClient.Commands
 
         public string Description => "Removes a note in which you are the author of or have permission to.";
 
-        public string Ussage => "type rmnote {id} where id is the note id you wish to remove.";
+        public string Usage => "type rmnote {id} where id is the note id you wish to remove.";
 
         /// <summary>
         /// Removes a note from the server.
@@ -22,7 +22,7 @@ namespace ScribeClient.Commands
         {
             if (args.Length <= 1)
             {
-                Console.WriteLine("Invalid Command Ussage type rmnote -h for help");
+                Console.WriteLine("Invalid Command Usage type rmnote -h for help");
                 return;
             }
             //TODO: Check if the user is logged in.
@@ -35,7 +35,7 @@ namespace ScribeClient.Commands
                     Console.WriteLine("The note was note removed, perhaps invalid permission or invalid id.");
             }
             else
-                Console.WriteLine("Invalid command ussage, type rmnote -h for ussage information.");
+                Console.WriteLine("Invalid command Usage, type rmnote -h for Usage information.");
         }
     }
 }

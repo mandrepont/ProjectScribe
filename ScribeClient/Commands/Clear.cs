@@ -10,7 +10,7 @@ namespace ScribeClient.Commands
 
         public string Description => "Clears the console window";
 
-        public string Ussage => "Just type clear and watch the magic happen...";
+        public string Usage => "Just type clear and watch the magic happen...";
 
         /// <summary>
         /// Simply clears the console.

@@ -11,7 +11,7 @@ namespace ScribeClient.Commands
     {
         string Command { get;}
         string Description { get;}
-        string Ussage { get;}
+        string Usage { get;}
         void  Execute(string[] args);
     }
 }

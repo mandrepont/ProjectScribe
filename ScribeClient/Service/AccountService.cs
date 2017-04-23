@@ -12,11 +12,11 @@ namespace ScribeClient.Service
     public class AccountService
     {
         /// <summary>
-        /// Authenticates the user and retreives that user's jwt token.
+        /// Authenticates the user and retrieves that user's jwt token.
         /// </summary>
         /// <param name="username">Username of the client.</param>
         /// <param name="password">Password of the client.</param>
-        /// <returns>true = authenicated
+        /// <returns>true = authenticated
         /// false = failed.</returns>
         public static async Task<bool> Authenticate(string username, string password)
         {

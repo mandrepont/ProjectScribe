@@ -18,7 +18,7 @@ namespace ScribeClient
         public CommandHandler()
         {
             Commands = new List<ICommand>();
-            //Sadly in dotnet.core getting executing assembly is not yet implimented. 
+            //Sadly in dotnet.core getting executing assembly is not yet implemented. 
             Commands.Add(new CreateNote());
             Commands.Add(new ListNote());
             Commands.Add(new Clear());
@@ -42,10 +42,10 @@ namespace ScribeClient
         }
 
         /// <summary>
-        /// Determin how to handle a command what what should be done.
+        /// Determine how to handle a command and what should be done.
         /// Called by the listener.
         /// </summary>
-        /// <param name="command">Command imput.</param>
+        /// <param name="command">Command input.</param>
         private void HandleCommand(string[] command)
         {
             if (command[0] == "help")
@@ -53,7 +53,7 @@ namespace ScribeClient
                 Console.WriteLine(string.Format("{0,-12} || {1}", "[ActionWord]", "[Description]"));
                 foreach (var cmd in Commands)
                     Console.WriteLine(string.Format("{0,-12} || {1}", cmd.Command, cmd.Description));
-                Console.WriteLine("Put -h as the first argument on any command for ussage information.");
+                Console.WriteLine("Put -h as the first argument on any command for Usage information.");
             }
             else
             {
@@ -64,7 +64,7 @@ namespace ScribeClient
                     {
                         //Check if the user just needs help rather than executing
                         if (command[1] == "-h" || command[1] == "-help")
-                            Console.WriteLine(cmd.Ussage);
+                            Console.WriteLine(cmd.Usage);
                         else cmd.Execute(command);
                     }
                     else cmd.Execute(command);

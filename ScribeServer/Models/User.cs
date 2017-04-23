@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace ScribeServer.Models
 {
     /// <summary>
-    /// User is a data layer for the TestUsers that are hardcoded into the Authenication Configuration.
+    /// User is a data layer for the TestUsers that are hard coded into the Authentication Configuration.
     /// </summary>
     public class User
     {

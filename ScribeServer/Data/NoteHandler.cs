@@ -35,7 +35,7 @@ namespace ScribeServer.Data
             }
             catch (Exception e)
             {
-                //Only show excpetion message in debug env.
+                //Only show exception message in debug env.
 #if DEBUG
                 Console.WriteLine(e);
 #endif
@@ -63,7 +63,7 @@ namespace ScribeServer.Data
             }
             catch (Exception e)
             {
-                //Only show excpetion message in debug env.
+                //Only show exception message in debug env.
 #if DEBUG
                 Console.WriteLine(e);
 #endif
@@ -72,7 +72,7 @@ namespace ScribeServer.Data
         }
 
         /// <summary>
-        /// Beucase of the list there is no key value to update, so we must first 
+        /// Because of the list there is no key value to update, so we must first 
         /// remove the old note and add a new note with the updated information.
         /// </summary>
         /// <param name="note">Updated Note.</param>
@@ -94,7 +94,7 @@ namespace ScribeServer.Data
             }
             catch (Exception e)
             {
-                //Only show excpetion message in debug env.
+                //Only show exception message in debug env.
 #if DEBUG
                 Console.WriteLine(e);
 #endif

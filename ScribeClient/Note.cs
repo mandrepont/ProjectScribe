@@ -33,12 +33,12 @@ namespace ScribeClient
         /// </summary>
         public bool IsPrivate { get; set; }
         /// <summary>
-        /// Determins if the note is encypted using the author key.
+        /// Determines if the note is encrypted using the author key.
         /// Currently Unused
         /// </summary>
         public bool IsEncrypted { get; set; }
         /// <summary>
-        /// When the note was entered into the database orginally.
+        /// When the note was entered into the database originally.
         /// </summary>
         public DateTime CreationDate { get; set; }
         /// <summary>

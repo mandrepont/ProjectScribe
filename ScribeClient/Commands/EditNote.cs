@@ -11,7 +11,7 @@ namespace ScribeClient.Commands
 
         public string Description => "Edits and existing note that logged in user is able to edit.";
 
-        public string Ussage => "editnote {id}, where id is the note id you wish to edit then follow the prompts";
+        public string Usage => "editnote {id}, where id is the note id you wish to edit then follow the prompts";
 
         /// <summary>
         /// Edit note is not how I would like it to be, but what can I expect for a console application.
@@ -22,7 +22,7 @@ namespace ScribeClient.Commands
         {
             if(args.Length <= 1)
             {
-                Console.WriteLine("Invalid Command Ussage type editnote -h for help");
+                Console.WriteLine("Invalid Command Usage type editnote -h for help");
                 return;
             }
             if (int.TryParse(args[1], out int id))
@@ -70,7 +70,7 @@ namespace ScribeClient.Commands
                 return;
             }
             else
-                Console.WriteLine("Invalid Command Ussage type editnote -h for help");
+                Console.WriteLine("Invalid Command Usage type editnote -h for help");
             ;
         }
     }

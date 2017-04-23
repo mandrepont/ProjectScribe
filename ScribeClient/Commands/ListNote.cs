@@ -11,18 +11,18 @@ namespace ScribeClient.Commands
 
         public string Description => "List notes from public, private respositories. Or a single note by its ID";
 
-        public string Ussage => "lsnote [Options] \n Options: \n public : returns all public note's title and ids\n private : Returns all private notes posted by the current logged in user" +
+        public string Usage => "lsnote [Options] \n Options: \n public : returns all public note's title and ids\n private : Returns all private notes posted by the current logged in user" +
             "\n noteid : Returns a particular note in detail EX 'lsnote 3'\n private {id} : Returns details about a private note created by logged in user.";
 
         /// <summary>
-        /// This commands determins what list or indivdual note the user is request and gets that list or note. 
+        /// This commands determines what list or individual note the user is request and gets that list or note. 
         /// </summary>
         /// <param name="args"></param>
         public void Execute(string[] args)
         {
             if (args.Length <= 1)
             {
-                Console.WriteLine("Invalid Command Ussage type lsnote -h for help");
+                Console.WriteLine("Invalid Command Usage type lsnote -h for help");
                 return;
             }
             if (args[1] == "public")
@@ -54,7 +54,7 @@ namespace ScribeClient.Commands
                         {
                             Console.WriteLine("Title: " + task.Result.Title);
                             Console.WriteLine("Author: " + task.Result.AuthorName);
-                            Console.WriteLine("Orginally Posted: " + task.Result.CreationDate + "|| Last Updated: " + task.Result.LastUpdate);
+                            Console.WriteLine("Originally Posted: " + task.Result.CreationDate + "|| Last Updated: " + task.Result.LastUpdate);
                             Console.WriteLine("Content: " + task.Result.Content);
                         }
                         else
@@ -62,7 +62,7 @@ namespace ScribeClient.Commands
                         return;
                     }
                     else
-                        Console.WriteLine("Invalid Command Ussage type lsnote -h for help");
+                        Console.WriteLine("Invalid Command Usage type lsnote -h for help");
                 }
                 var result = Task.Run(() => Service.NoteService.GetPrivateList());
                 if (result.Result != null)
@@ -80,7 +80,7 @@ namespace ScribeClient.Commands
                 {
                     Console.WriteLine("Title: " + task.Result.Title);
                     Console.WriteLine("Author: " + task.Result.AuthorName);
-                    Console.WriteLine("Orginally Posted: " + task.Result.CreationDate + "|| Last Updated: " + task.Result.LastUpdate);
+                    Console.WriteLine("Originally Posted: " + task.Result.CreationDate + "|| Last Updated: " + task.Result.LastUpdate);
                     Console.WriteLine("Content: " + task.Result.Content);
                 }
                 else
@@ -88,7 +88,7 @@ namespace ScribeClient.Commands
                 return;
             }
             else
-                Console.WriteLine("Invalid Command Ussage type lsnote -h for help");
+                Console.WriteLine("Invalid Command Usage type lsnote -h for help");
         }
     }
 }

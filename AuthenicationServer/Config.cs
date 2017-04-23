@@ -23,7 +23,7 @@ namespace AuthenicationServer
         }
 
         /// <summary>
-        /// The authenication server needs to know what api are open to authenicate against.
+        /// The authentication server needs to know what api are open to authenticate against.
         /// Supports large multi-project/api systems.
         /// </summary>
         /// <returns></returns>
@@ -59,9 +59,9 @@ namespace AuthenicationServer
 
         /// <summary>
         /// Hard coded members stored in memory is just a bad idea all together, however there is a large amount of
-        /// IdenityServer code in order to use extrnal resources. For now TestUsers are suffice.
+        /// IdenityServer code in order to use external resources. For now TestUsers are suffice.
         /// </summary>
-        /// <returns>All users avaliable.</returns>
+        /// <returns>All users available.</returns>
         public static List<TestUser> GetUsers()
         {
             return new List<TestUser>

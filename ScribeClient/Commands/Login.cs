@@ -11,10 +11,10 @@ namespace ScribeClient.Commands
 
         public string Description => "Allows a user to login.";
 
-        public string Ussage => "login [username] [password]";
+        public string Usage => "login [username] [password]";
 
         /// <summary>
-        /// Excutes a login autheniceniation with the auth server.
+        /// Executes a login authentication with the auth server.
         /// </summary>
         /// <param name="args">Command args.</param>
         public void Execute(string[] args)
@@ -24,13 +24,13 @@ namespace ScribeClient.Commands
                 var task = Task.Run(() => Service.AccountService.Authenticate(args[1], args[2]));
                 if (task.Result)
                 {
-                    Console.WriteLine("Account Authenicated");
+                    Console.WriteLine("Account Authenticated");
                     var infoTask = Task.Run(() => Service.AccountService.GetValues());
                     Console.WriteLine(infoTask.Result);
                 }
             }
             else
-                Console.WriteLine("Invalid Command Ussage type login -h for help");
+                Console.WriteLine("Invalid Command Usage type login -h for help");
 
             
         }

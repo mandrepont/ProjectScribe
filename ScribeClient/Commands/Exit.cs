@@ -10,10 +10,10 @@ namespace ScribeClient.Commands
 
         public string Description => "Exits the program.";
 
-        public string Ussage => "Type exit and the program quits.";
+        public string Usage => "Type exit and the program quits.";
 
         /// <summary>
-        /// Simply cloeses the program.
+        /// Simply closes the program.
         /// </summary>
         /// <param name="args">Command args.</param>
         public void Execute(string[] args)

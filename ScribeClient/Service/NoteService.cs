@@ -40,7 +40,7 @@ namespace ScribeClient.Service
         }
 
         /// <summary>
-        /// Retreives the list made public to everyone.
+        /// Retrieves the list made public to everyone.
         /// </summary>
         /// <returns>List of notes. </returns>
         public static async Task<List<Note>> GetPublicList()
@@ -122,7 +122,7 @@ namespace ScribeClient.Service
         }
 
         /// <summary>
-        /// Retreieves a public note from the general repo.
+        /// Retrieves a public note from the general repo.
         /// </summary>
         /// <param name="id">Id of note.</param>
         /// <returns>Note Object.</returns>
