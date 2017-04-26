@@ -25,6 +25,11 @@ namespace ScribeClient.Commands
                 Console.WriteLine("Invalid Command Usage type editnote -h for help");
                 return;
             }
+            if (Constants.AccessToken == null)
+            {
+                Console.WriteLine("User must be logged in to use this command. Login with 'login' command.");
+                return;
+            }
             if (int.TryParse(args[1], out int id))
             {
                 var task = Task.Run(() => Service.NoteService.GetNoteById(id));

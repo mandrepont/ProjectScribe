@@ -42,7 +42,10 @@ namespace ScribeServer.Controllers
         {
             var sub = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub").Value.ToString());
             var user = Database.GlobalDatabase.Users.FirstOrDefault(u => u.AuthorId == sub);
-            return Database.GlobalDatabase.Notes.Where(n => n.AuthorId == user.AuthorId && n.IsPrivate);
+            if(user.Role != UserRoles.Admin)
+                return Database.GlobalDatabase.Notes.Where(n => n.AuthorId == user.AuthorId && n.IsPrivate);
+            else
+                return Database.GlobalDatabase.Notes.Where(n => n.IsPrivate);
         }
 
         /// <summary>
@@ -59,7 +62,10 @@ namespace ScribeServer.Controllers
         {
             var sub = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub").Value.ToString());
             var user = Database.GlobalDatabase.Users.FirstOrDefault(u => u.AuthorId == sub);
-            return Database.GlobalDatabase.Notes.FirstOrDefault(n => n.AuthorId == user.AuthorId && n.IsPrivate && n.Id == id);
+            if(user.Role != UserRoles.Admin)
+                return Database.GlobalDatabase.Notes.FirstOrDefault(n => n.AuthorId == user.AuthorId && n.IsPrivate && n.Id == id);
+            else
+                return Database.GlobalDatabase.Notes.FirstOrDefault(n => n.IsPrivate && n.Id == id);
         }
 
         /// <summary>
@@ -125,14 +131,21 @@ namespace ScribeServer.Controllers
         /// 500 for internal error adding the database.
         /// </returns>
         [HttpPut("{id:int}")]
+        [Authorize]
         public IActionResult Put(int id, [FromBody]Note content)
         {
+            var sub = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub").Value.ToString());
+            var user = Database.GlobalDatabase.Users.FirstOrDefault(u => u.AuthorId == sub);
             if (content != null)
             {
-                if (NoteHandler.UpdateNote(content))
-                    return new CreatedAtActionResult("notes", "GET", id, content);
-                else
-                    return StatusCode(500);
+                if (content.AuthorId == user.AuthorId || user.Role == UserRoles.Admin)
+                {
+                    if (NoteHandler.UpdateNote(content))
+                        return new CreatedAtActionResult("notes", "GET", id, content);
+                    else
+                        return StatusCode(500);
+                }
+                else return Unauthorized();
             }
 
             //Bad Request format.
@@ -147,11 +160,20 @@ namespace ScribeServer.Controllers
         /// EX: DELETE: api/notes/abd will return 404.
         /// </summary>
         /// <param name="id">Id of the note being deleted</param>
-        /// <returns>HTTP standard of 204 for created and 400 for invalid request.</returns>
+        /// <returns>HTTP standard of 204 for created and 400 for invalid request. 401 for unauthorized permissions.</returns>
         [HttpDelete("{id:int}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
-            var removed = NoteHandler.RemoveNote(id);
+            var sub = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub").Value.ToString());
+            var user = Database.GlobalDatabase.Users.FirstOrDefault(u => u.AuthorId == sub);
+            bool removed;
+            if(user.Role == UserRoles.Admin)
+                removed = NoteHandler.RemoveNote(id);
+            else if (Database.GlobalDatabase.Notes.FirstOrDefault(n => n.AuthorId == user.AuthorId && n.Id == id) != null)
+                removed = NoteHandler.RemoveNote(id);
+            else
+                return Unauthorized();
             if (removed)
                 return StatusCode(204);
             else

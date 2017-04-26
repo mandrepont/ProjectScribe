@@ -25,6 +25,11 @@ namespace ScribeClient.Commands
                 Console.WriteLine("Invalid Command Usage type rmnote -h for help");
                 return;
             }
+            if (Constants.AccessToken == null)
+            {
+                Console.WriteLine("User must be logged in to use this command. Login with 'login' command.");
+                return;
+            }
             //TODO: Check if the user is logged in.
             if (int.TryParse(args[1], out int id))
             {

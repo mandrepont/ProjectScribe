@@ -157,7 +157,7 @@ namespace ScribeClient.Service
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Constants.BASE_URI_API);
-                //TODO: Add token support when the server accepts it.
+                client.SetBearerToken(Constants.AccessToken);
                 var jsonnote = JsonConvert.SerializeObject(note);
                 var content = new StringContent(jsonnote, Encoding.UTF8, "application/json");
                 try
@@ -184,7 +184,7 @@ namespace ScribeClient.Service
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Constants.BASE_URI_API);
-                //TODO: Add token support when the server accepts it.
+                client.SetBearerToken(Constants.AccessToken);
                 try
                 {
                     var respone = await client.DeleteAsync("/api/notes/" + id);
